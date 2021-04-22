@@ -1,24 +1,67 @@
-# README
+# FurimaのER図
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+| Colum              | Type    | Option                    |
+| ------------------ | ------- | ------------------------- |
+| nickname           | string  | null: false               |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
+| last_name          | string  | null: false               |
+| first_name         | string  | null: false               |
+| last_kana          | string  | null: false               |
+| first_kana         | string  | null: false               |
+| birth              | date    | null: false               |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :records
 
-* Configuration
+## itemsテーブル
 
-* Database creation
+| Colum       | Type       | Option                         |
+| ----------- | ---------- | ------------------------------ |
+| item_name   | string     | null: false                    |
+| text        | text       | null: false                    |
+| category_id | integer    | null: false                    |
+| status_id   | integer    | null: false                    |
+| pay_id      | integer    | null: false                    |
+| area_id     | integer    | null: false                    |
+| day_id      | integer    | null: false                    |
+| price       | integer    | null: false                    |
+| user        | references | null: false, foreign_key: true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :user
+- has_one :record
 
-* Services (job queues, cache servers, search engines, etc.)
+## buysテーブル
 
-* Deployment instructions
+| Colum        | Type       | Option                         |
+| ------------ | ---------- | ------------------------------ |
+| post_code    | string     | null: false                    |
+| area_id      | integer    | null: false                    |
+| muni         | string     | null: false                    |
+| add          | string     | null: false                    |
+| buil         | string     |                                |
+| tel          | string     | null: false                    |
+| record       | references | null: false, foreign_key: true |
 
-* ...
+### Association
+
+- belong_to :record
+
+## recordsテーブル
+
+| Colum        | Type       | Option                         |
+| ------------ | ---------- | ------------------------------ |
+| user         | references | null: false, foreign_key: true |
+| item         | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one :buy
