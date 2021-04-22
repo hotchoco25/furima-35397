@@ -42,15 +42,16 @@
 | Colum        | Type       | Option                         |
 | ------------ | ---------- | ------------------------------ |
 | post_code    | string     | null: false                    |
-| pref_id      | integer    | null: false                    |
+| area_id      | integer    | null: false                    |
 | muni         | string     | null: false                    |
 | add          | string     | null: false                    |
 | buil         | string     |                                |
 | tel          | string     | null: false                    |
+| record       | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_one :record
+- belong_to :record
 
 ## recordsテーブル
 
@@ -58,10 +59,9 @@
 | ------------ | ---------- | ------------------------------ |
 | user         | references | null: false, foreign_key: true |
 | item         | references | null: false, foreign_key: true |
-| buy          | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :buy
+- has_one :buy
