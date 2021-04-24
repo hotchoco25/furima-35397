@@ -11,16 +11,17 @@ class User < ApplicationRecord
   NAME_KANA_REGEX = /\A[ァ-ヶー－]+\z/.freeze
   NAME_KANA_REGEX_MESSAGE = "Full-width katakana characters"
 
-  validates :nickname, presence: true
-  validates_format_of :password, with: PASSWORD_REGEX, message: PASSWORD_REGEX_MESSAGE
-  validates :last_name, presence: true
-  validates_format_of :last_name, with: NAME_REGEX, message: NAME_REGEX_MESSAGE
-  validates :first_name, presence: true
-  validates_format_of :first_name, with: NAME_REGEX, message: NAME_REGEX_MESSAGE
-  validates :last_kana, presence: true
-  validates_format_of :last_kana, with: NAME_KANA_REGEX, message: NAME_KANA_REGEX_MESSAGE
-  validates :first_kana, presence: true
-  validates_format_of :first_kana, with: NAME_KANA_REGEX, message: NAME_KANA_REGEX_MESSAGE
-  validates :birth, presence: true
-
+  with_options presence: true do
+    validates :nickname
+    validates_format_of :password, with: PASSWORD_REGEX, message: PASSWORD_REGEX_MESSAGE
+    validates :last_name
+    validates_format_of :last_name, with: NAME_REGEX, message: NAME_REGEX_MESSAGE
+    validates :first_name
+    validates_format_of :first_name, with: NAME_REGEX, message: NAME_REGEX_MESSAGE
+    validates :last_kana
+    validates_format_of :last_kana, with: NAME_KANA_REGEX, message: NAME_KANA_REGEX_MESSAGE
+    validates :first_kana
+    validates_format_of :first_kana, with: NAME_KANA_REGEX, message: NAME_KANA_REGEX_MESSAGE
+    validates :birth
+  end
 end

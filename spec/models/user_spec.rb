@@ -115,6 +115,9 @@ RSpec.describe User, type: :model do
         @user.last_kana = 'あ'
         @user.valid?
         expect(@user.errors.full_messages).to include("Last kana Full-width katakana characters")
+        @user.last_kana = 'a'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last kana Full-width katakana characters")
       end
       it 'first_kanaが空では登録できない' do
         @user.first_kana = ''
@@ -123,6 +126,9 @@ RSpec.describe User, type: :model do
       end
       it 'first_kanaが全角カタカナでないと登録できない' do
         @user.first_kana = 'あ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First kana Full-width katakana characters")
+        @user.first_kana = 'a'
         @user.valid?
         expect(@user.errors.full_messages).to include("First kana Full-width katakana characters")
       end
