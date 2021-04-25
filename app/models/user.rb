@@ -14,14 +14,14 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nickname
     validates_format_of :password, with: PASSWORD_REGEX, message: PASSWORD_REGEX_MESSAGE
-    validates :last_name
-    validates_format_of :last_name, with: NAME_REGEX, message: NAME_REGEX_MESSAGE
-    validates :first_name
-    validates_format_of :first_name, with: NAME_REGEX, message: NAME_REGEX_MESSAGE
-    validates :last_kana
-    validates_format_of :last_kana, with: NAME_KANA_REGEX, message: NAME_KANA_REGEX_MESSAGE
-    validates :first_kana
-    validates_format_of :first_kana, with: NAME_KANA_REGEX, message: NAME_KANA_REGEX_MESSAGE
+    with_options format: { with: NAME_REGEX, message: NAME_REGEX_MESSAGE } do
+      validates :last_name
+      validates :first_name
+    end
+    with_options format: { with: NAME_KANA_REGEX, message: NAME_KANA_REGEX_MESSAGE } do
+      validates :last_kana
+      validates :first_kana
+    end
     validates :birth
   end
 end
