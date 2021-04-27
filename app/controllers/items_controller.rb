@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_session, except: :index
+  before_action :authenticate_user!, except: :index
 
   def index
   end
@@ -25,9 +25,4 @@ class ItemsController < ApplicationController
     ).merge(user_id: current_user.id)
   end
 
-  def move_to_session
-    unless user_signed_in?
-      redirect_to new_user_session_path
-    end
-  end
 end
