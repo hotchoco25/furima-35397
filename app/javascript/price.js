@@ -3,13 +3,13 @@ function price (){
   itemPrice.addEventListener("keyup", () => {
     const itemPriceValue = itemPrice.value
 
-    const taxPrice = itemPriceValue / 10;
+    const taxPrice = Math.floor(itemPriceValue / 10);
     const addTaxPrice = document.getElementById("add-tax-price");
-    addTaxPrice.innerHTML = taxPrice;
+    addTaxPrice.innerHTML = taxPrice.toLocaleString();
 
     const profitTax = itemPriceValue - taxPrice;
     const profit = document.getElementById("profit");
-    profit.innerHTML = profitTax;
+    profit.innerHTML = profitTax.toLocaleString();
   });
 };
 
