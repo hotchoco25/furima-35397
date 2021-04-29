@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update]
+  before_action :redirect_path, only: [:edit, :update]
 
   def index
     @items = Item.order("created_at DESC").includes(:user)
@@ -23,11 +24,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    edit_update_path
   end
 
   def update
-    edit_update_path
     if @item.update(item_params)
       redirect_to item_path, method: :get
     else
@@ -43,7 +42,7 @@ class ItemsController < ApplicationController
     ).merge(user_id: current_user.id)
   end
 
-  def edit_update_path
+  def redirect_path
     if @item.user_id != current_user.id
       redirect_to action: :index
     end
