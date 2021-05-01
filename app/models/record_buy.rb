@@ -12,4 +12,10 @@ class RecordBuy
     validates :add
     validates :tel, format: {with: /\A[0-9]\z/, message: 'Input only number'}
   end
+
+  def save
+    record = Record.create(user_id: user_id, item_id: item_id)
+
+    Buy.save(post_code: post_code, area_id: area_id, muni: muni, add: add, buil: buil, tel: tel, record_id: record.id)
+  end
 end
