@@ -11,7 +11,7 @@ class RecordBuy
 
     validates :muni
     validates :add
-    validates :tel, format: { with: /\A[0-9]\z/, message: 'Input only number' }
+    validates :tel, format: { with: /\A[0-9]+\z/, message: 'Input only number' }
   end
 
   def save
