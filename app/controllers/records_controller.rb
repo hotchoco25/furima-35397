@@ -1,12 +1,15 @@
 class RecordsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_item
+  before_action :redirect_path_mine
+  before_action :redirect_path_sold
+
   def index
-    @item = Item.find(params[:item_id])
     @record_buy = RecordBuy.new
   end
 
   def create
     @record_buy = RecordBuy.new(record_params)
-    @item = Item.find(params[:item_id])
     if @record_buy.valid?
       pay_item
       @record_buy.save
@@ -31,6 +34,22 @@ class RecordsController < ApplicationController
         card: @record_buy.token,
         currency: 'jpy'
       )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def redirect_path_mine
+    if @item.user_id == current_user.id
+      redirect_to root_path
+    end
+  end
+
+  def redirect_path_sold
+    if @item.record.present?
+      redirect_to root_path
+    end
   end
 
 end
