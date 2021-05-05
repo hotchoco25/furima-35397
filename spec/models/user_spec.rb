@@ -121,6 +121,7 @@ RSpec.describe User, type: :model do
         @user.last_kana = 'あ'
         @user.valid?
         expect(@user.errors.full_messages).to include("Last kana Full-width katakana characters")
+        
         @user.last_kana = 'a'
         @user.valid?
         expect(@user.errors.full_messages).to include("Last kana Full-width katakana characters")
@@ -134,6 +135,7 @@ RSpec.describe User, type: :model do
         @user.first_kana = 'あ'
         @user.valid?
         expect(@user.errors.full_messages).to include("First kana Full-width katakana characters")
+        
         @user.first_kana = 'a'
         @user.valid?
         expect(@user.errors.full_messages).to include("First kana Full-width katakana characters")

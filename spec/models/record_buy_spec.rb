@@ -6,7 +6,7 @@ RSpec.describe RecordBuy, type: :model do
     before do
       @user = FactoryBot.create(:user)
       @item = FactoryBot.create(:item)
-      sleep(0.1)
+      sleep(0.05)
       @record_buy = FactoryBot.build(:record_buy, user_id: @user.id, item_id: @item.id)
     end
 
@@ -18,16 +18,29 @@ RSpec.describe RecordBuy, type: :model do
         @record_buy.buil = ""
         expect(@record_buy).to be_valid
       end
+      it '電話番号が11桁以下なら購入できる' do
+        @record_buy.tel = "09012345678"
+        expect(@record_buy).to be_valid
+      end
     end
 
     context '商品購入ができないとき' do
+      it 'クレジットカードのトークン情報が空では購入できない' do
+        @record_buy.token = ""
+        @record_buy.valid?
+        expect(@record_buy.errors.full_messages).to include("Token can't be blank")
+      end
       it 'post_codeが空では購入できない' do
         @record_buy.post_code = ""
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Post code can't be blank")
       end
-      it 'post_codeが３文字ー４文字ではないと購入できない' do
+      it 'post_codeが半角数字で３文字-４文字ではないと購入できない' do
         @record_buy.post_code = "1234567"
+        @record_buy.valid?
+        expect(@record_buy.errors.full_messages).to include("Post code Input correctly")
+        
+        @record_buy.post_code = "１２３ー４５６７"
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Post code Input correctly")
       end
@@ -53,6 +66,10 @@ RSpec.describe RecordBuy, type: :model do
       end
       it 'telが数字以外では購入できない' do
         @record_buy.tel = "0120-00-0000"
+        @record_buy.valid?
+        expect(@record_buy.errors.full_messages).to include("Tel Input only number")
+
+        @record_buy.tel = "０９０１２３４５６７８"
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Tel Input only number")
       end
