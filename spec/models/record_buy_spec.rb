@@ -35,12 +35,12 @@ RSpec.describe RecordBuy, type: :model do
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Post code can't be blank")
       end
-      it 'post_codeが半角数字で３文字-４文字ではないと購入できない' do
-        # -がない場合
+      it 'post_codeが-がないときは購入できない' do
         @record_buy.post_code = "1234567"
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Post code Input correctly")
-        # 全角の場合
+      end
+      it 'post_codeが半角数字ではないときは購入できない' do
         @record_buy.post_code = "１２３ー４５６７"
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Post code Input correctly")
