@@ -40,6 +40,7 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
     end
+
     context '新規登録ができないとき' do
       it 'nicknameが空では登録できない' do
         @user.nickname = ''
@@ -116,10 +117,12 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Last kana can't be blank")
       end
-      it 'last_kanaが全角カタカナでないと登録できない' do
+      it 'last_kanaがひらがなでは登録できない' do
         @user.last_kana = 'あ'
         @user.valid?
         expect(@user.errors.full_messages).to include("Last kana Full-width katakana characters")
+      end
+      it 'last_kanaが英字では登録できない' do
         @user.last_kana = 'a'
         @user.valid?
         expect(@user.errors.full_messages).to include("Last kana Full-width katakana characters")
@@ -129,10 +132,12 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("First kana can't be blank")
       end
-      it 'first_kanaが全角カタカナでないと登録できない' do
+      it 'first_kanaがひらがなでは登録できない' do
         @user.first_kana = 'あ'
         @user.valid?
         expect(@user.errors.full_messages).to include("First kana Full-width katakana characters")
+      end
+      it 'first_kanaが英字では登録できない' do
         @user.first_kana = 'a'
         @user.valid?
         expect(@user.errors.full_messages).to include("First kana Full-width katakana characters")
