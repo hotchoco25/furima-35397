@@ -8,13 +8,13 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
+      <%# 売却済み %>
       <% if @item.record.present? %>
-      <div class="sold-out">
-        <span>Sold Out!!</span>
-      </div>
+        <div class="sold-out">
+          <span>Sold Out!!</span>
+        </div>
       <% end %>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+      <%# /売却済み %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -24,20 +24,17 @@
         <%= Pay.find(@item.pay_id).pay_name %>
       </span>
     </div>
-
+    <%# 売却前の商品で出品者は編集と削除を、出品者以外のログインユーザーは購入を出す %>
     <% if @item.record.nil? %>
       <% if user_signed_in? && current_user.id == @item.user_id %>
         <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
         <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
-      <% end %>
-    <%# 商品が売れていない場合はこちらを表示しましょう %>
-      <% if user_signed_in? && current_user.id != @item.user_id %>
+      <% else %>
         <%= link_to "購入画面に進む", item_records_path(@item.id), class:"item-red-btn"%>
       <% end %>
     <% end %>
-    <%# //商品が売れていない場合はこちらを表示しましょう %>
-
+    <%# /売却前の商品で出品者は編集と削除を、出品者以外のログインユーザーは購入を出す %>
     <div class="item-explain-box">
       <span><%= @item.text %></span>
     </div>
@@ -82,6 +79,7 @@
   </div>
   <%# /商品の概要 %>
 
+  <%# コメント欄 %>
   <div class="comment-box">
     <form>
       <textarea class="comment-text"></textarea>
@@ -96,6 +94,7 @@
       </button>
     </form>
   </div>
+  <%# /コメント欄 %>
   <div class="links">
     <a href="#" class="change-item-btn">
       ＜ 前の商品
