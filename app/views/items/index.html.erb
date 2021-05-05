@@ -125,20 +125,17 @@
     <h2 class='title'>ピックアップカテゴリー</h2>
     <%= link_to '新規投稿商品', new_item_path, class: "subtitle" %>
     <ul class='item-lists'>
-      <%# 出品があるときは商品が、ないときはダミーだ出る %>
       <% if @items.present? %>
         <% @items.each do |item| %>
           <li class='list'>
             <%= link_to item_path(item.id) do %>
               <div class='item-img-content'>
                 <%= image_tag item.image, class: "item-img" %>
-                <%# 売却済み %>
                 <% if item.record.present? %>
                   <div class='sold-out'>
                     <span>Sold Out!!</span>
                   </div>
                 <% end %>
-                <%# /売却済み %>
               </div>
               <div class='item-info'>
                 <h3 class='item-name'>
@@ -174,7 +171,6 @@
           <% end %>
         </li>
       <% end %>
-      <%# /出品があるときは商品が、ないときはダミーだ出る %>
     </ul>
   </div>
   <%# /商品一覧 %>

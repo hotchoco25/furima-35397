@@ -1,8 +1,8 @@
 class RecordsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_item
-  before_action :redirect_path_mine
-  before_action :redirect_path_sold
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :set_item, only: [:index, :create]
+  before_action :redirect_path_mine, only: [:index, :create]
+  before_action :redirect_path_sold, only: [:index, :create]
 
   def index
     @record_buy = RecordBuy.new

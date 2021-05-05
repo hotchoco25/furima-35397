@@ -65,12 +65,12 @@ RSpec.describe RecordBuy, type: :model do
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Tel can't be blank")
       end
-      it 'telが数字以外では購入できない' do
-        # -が含まれている場合
+      it 'telに-が含まれているときは購入できない' do
         @record_buy.tel = "0120-00-0000"
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Tel Input only number")
-        # 全角の場合
+      end
+      it 'telが全角数字では購入できない' do
         @record_buy.tel = "０９０１２３４５６７８"
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Tel Input only number")
