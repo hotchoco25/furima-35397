@@ -36,16 +36,17 @@ RSpec.describe RecordBuy, type: :model do
         expect(@record_buy.errors.full_messages).to include("Post code can't be blank")
       end
       it 'post_codeが半角数字で３文字-４文字ではないと購入できない' do
+        # -がない場合
         @record_buy.post_code = "1234567"
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Post code Input correctly")
-        
+        # 全角の場合
         @record_buy.post_code = "１２３ー４５６７"
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Post code Input correctly")
       end
       it 'area_idが1では購入できない' do
-        @record_buy.area_id = "1"
+        @record_buy.area_id = 1
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Area  Select")
       end
@@ -65,10 +66,11 @@ RSpec.describe RecordBuy, type: :model do
         expect(@record_buy.errors.full_messages).to include("Tel can't be blank")
       end
       it 'telが数字以外では購入できない' do
+        # -が含まれている場合
         @record_buy.tel = "0120-00-0000"
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Tel Input only number")
-
+        # 全角の場合
         @record_buy.tel = "０９０１２３４５６７８"
         @record_buy.valid?
         expect(@record_buy.errors.full_messages).to include("Tel Input only number")

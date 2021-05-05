@@ -5,14 +5,9 @@ class RecordBuy
   with_options presence: true do
     validates :token
     validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'Input correctly' }
-  end
-
-  validates :area_id, numericality: { other_than: 1, message: " Select" }
-
-  with_options presence: true do
+    validates :area_id, numericality: { other_than: 1, message: " Select" }
     validates :user_id
     validates :item_id
-
     validates :muni
     validates :add
     validates :tel, format: { with: /\A[0-9]+\z/, message: 'Input only number' }
