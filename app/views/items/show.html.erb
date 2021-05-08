@@ -77,18 +77,22 @@
 
   <%# コメント欄 %>
   <div class="comment-box">
-    <form>
-      <textarea class="comment-text"></textarea>
-      <p class="comment-warn">
-        相手のことを考え丁寧なコメントを心がけましょう。
-        <br>
-        不快な言葉遣いなどは利用制限や退会処分となることがあります。
-      </p>
-      <button type="submit" class="comment-btn">
-        <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
-        <span>コメントする<span>
-      </button>
-    </form>
+    <% if user_signed_in? %>
+      <form>
+        <textarea class="comment-text"></textarea>
+        <p class="comment-warn">
+          相手のことを考え丁寧なコメントを心がけましょう。
+          <br>
+          不快な言葉遣いなどは利用制限や退会処分となることがあります。
+        </p>
+        <button type="submit" class="comment-btn">
+          <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
+          <span>コメントする<span>
+        </button>
+      </form>
+    <% else %>
+      <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong>
+    <% end %>
   </div>
   <%# /コメント欄 %>
   <div class="links">
