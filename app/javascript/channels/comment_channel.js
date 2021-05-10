@@ -13,6 +13,7 @@ consumer.subscriptions.create("CommentChannel", {
     const html = `
       <p>${data.content.text}</p>
       <p>${data.content.created_at}</p>
+      <p>※※※ 最新のコメントは再読み込みして確認してください ※※※</p>
       `;
     const comments = document.getElementById('comments');
     const newComment = document.getElementById('comment_text');
