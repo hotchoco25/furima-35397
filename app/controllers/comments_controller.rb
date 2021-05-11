@@ -4,9 +4,11 @@ class CommentsController < ApplicationController
   before_action :redirect_path, only: :destroy
 
   def create
+    @item = Item.find(params[:item_id])
     @comment = Comment.new(comment_params)
     if @comment.save
-      ActionCable.server.broadcast 'comment_channel', content: @comment
+      # ActionCable.server.broadcast 'comment_channel', content: @comment
+      redirect_to item_path(@item.id), method: :get
     end
   end
 
