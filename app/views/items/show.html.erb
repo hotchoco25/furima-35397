@@ -77,18 +77,41 @@
 
   <%# コメント欄 %>
   <div class="comment-box">
-    <form>
-      <textarea class="comment-text"></textarea>
-      <p class="comment-warn">
-        相手のことを考え丁寧なコメントを心がけましょう。
-        <br>
-        不快な言葉遣いなどは利用制限や退会処分となることがあります。
-      </p>
-      <button type="submit" class="comment-btn">
-        <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
-        <span>コメントする<span>
-      </button>
-    </form>
+    <% if user_signed_in? %>
+      <%= form_with(model: [@item, @comment], local: true) do |f| %>
+        <%= f.text_area :text, class:"comment-text" %>
+        <p class="comment-warn">
+          相手のことを考え丁寧なコメントを心がけましょう。
+          <br>
+          不快な言葉遣いなどは利用制限や退会処分となることがあります。
+        </p>
+        <button type="submit" class="comment-btn">
+          <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
+          <span>コメントする<span>
+        </button>
+      <% end %>
+    <% else %>
+      <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong>
+    <% end %>
+    <div id=comments>
+      <% if @comments.present? %>
+        <p>コメント一覧</p>
+      <% end %>
+      <% @comments.reverse_each do |comment| %>
+        <div class="comment-list">
+          <div class="comment-list-maine">
+            <%= comment.text %>
+            <% if comment.user_id == current_user.id %>
+              <%= link_to "削除", item_comment_path(comment.id), method: :delete %>
+            <% end %>
+          </div>
+          <div class="comment-list-info">
+            <%= comment.user.nickname %>
+            <%= l comment.created_at %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
   <%# /コメント欄 %>
   <div class="links">

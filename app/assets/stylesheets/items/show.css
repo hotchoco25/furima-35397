@@ -205,3 +205,18 @@
   font-weight: bold;
   font-size: 23px;
 }
+
+.comment-list {
+  margin: 30px;
+}
+
+.comment-list-maine {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 30px 10px 0px;
+  word-break: break-word;
+}
+
+.comment-list-info {
+  display: flex;
+}

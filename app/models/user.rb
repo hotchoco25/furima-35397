@@ -27,4 +27,5 @@ class User < ApplicationRecord
 
   has_many :items
   has_many :records
+  has_many :comments
 end
