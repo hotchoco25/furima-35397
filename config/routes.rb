@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  # get 'users/index'
-  resources :users, only: [:index, :show]
+  resources :users, only: :show
   devise_for :users
   get 'items/index'
   root to: "items#index"
