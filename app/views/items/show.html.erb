@@ -38,7 +38,7 @@
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @item.user.nickname %></td>
+          <td class="detail-value"><%=link_to @item.user.nickname, user_path(@item.user_id) %></td>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
@@ -101,12 +101,12 @@
         <div class="comment-list">
           <div class="comment-list-maine">
             <%= comment.text %>
-            <% if comment.user_id == current_user.id %>
+            <% if user_signed_in? && (comment.user_id == current_user.id) %>
               <%= link_to "削除", item_comment_path(comment.id), method: :delete %>
             <% end %>
           </div>
           <div class="comment-list-info">
-            <%= comment.user.nickname %>
+            <%=link_to comment.user.nickname, user_path(comment.user_id) %>
             <%= l comment.created_at %>
           </div>
         </div>

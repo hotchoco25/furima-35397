@@ -1,0 +1,87 @@
+<%= render "shared/second-header" %>
+
+<div class="user-show">
+  <div class="user-box">
+    <h2 class="name">
+      <p>ユーザー詳細</p>
+    </h2>
+    <table class="detail-table">
+      <tbody>
+        <tr>
+          <th class="detail-item">ニックネーム</th>
+          <td class="detail-value"><%= @user.nickname %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">名前</th>
+          <td class="detail-value"><%= @user.last_name %> <%= @user.first_name%></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class='item-contents'>
+    <h2 class='title'>出品商品</h2>
+    <ul class='item-lists'>
+      <% @items.each do |item| %>
+        <li class='list'>
+          <%= link_to item_path(item.id) do %>
+            <div class='item-img-content'>
+              <%= image_tag item.image, class: "item-img" %>
+              <% if item.record.present? %>
+                <div class='sold-out'>
+                  <span>Sold Out!!</span>
+                </div>
+              <% end %>
+            </div>
+            <div class='item-info'>
+              <h3 class='item-name'>
+                <%= item.item_name %>
+              </h3>
+              <div class='item-price'>
+                <span><%= item.price %>円<br><%= item.pay.pay_name %></span>
+                <div class='star-btn'>
+                  <%= image_tag "star.png", class:"star-icon" %>
+                  <span class='star-count'>0</span>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <% if user_signed_in? && (@user.id == current_user.id) %>
+  <div class='item-contents'>
+    <% if current_user.records.present? %>
+      <h2 class='title'>購入商品</h2>
+    <% end %>
+    <ul class='item-lists'>
+      <% current_user.records.each do |record| %>
+        <li class='list'>
+          <%= link_to item_path(record.item.id) do %>
+            <div class='item-img-content'>
+              <%= image_tag record.item.image, class: "item-img" %>
+              <div class='sold-out'>
+                <span>Sold Out!!</span>
+              </div>
+            </div>
+            <div class='item-info'>
+              <h3 class='item-name'>
+                <%= record.item.item_name %>
+              </h3>
+              <div class='item-price'>
+                <span><%= record.item.price %>円<br><%= record.item.pay.pay_name %></span>
+                <div class='star-btn'>
+                  <%= image_tag "star.png", class:"star-icon" %>
+                  <span class='star-count'>0</span>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+</div>
+
+<%= render "shared/second-footer" %>
