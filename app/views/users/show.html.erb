@@ -38,6 +38,9 @@
       </tbody>
     </table>
   </div>
+  <% if current_user.id == @user.id %>
+    <%= link_to "ユーザー情報の編集", edit_user_registration_path(@user.id), method: :get, class: "user-red-btn" %>
+  <% end %>
   <div class='item-contents'>
     <h2 class='title'>出品商品</h2>
     <ul class='item-lists'>
