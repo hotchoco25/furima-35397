@@ -4,13 +4,13 @@ class RecordBuy
 
   with_options presence: true do
     validates :token
-    validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'Input correctly' }
-    validates :area_id, numericality: { other_than: 1, message: " Select" }
+    validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'を - ありの半角数字で入力してください' }
+    validates :area_id, numericality: { other_than: 1, message: "を選んでください" }
     validates :user_id
     validates :item_id
     validates :muni
     validates :add
-    validates :tel, format: { with: /\A[0-9]+\z/, message: 'Input only number' }
+    validates :tel, format: { with: /\A[0-9]+\z/, message: 'を半角数字で入力してください' }
   end
 
   def save
