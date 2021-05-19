@@ -43,27 +43,27 @@ RSpec.describe Item, type: :model do
       it 'category_idが1では登録できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category  Select")
+        expect(@item.errors.full_messages).to include("Category を選んでください")
       end
       it 'status_idが1では登録できない' do
         @item.status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status  Select")
+        expect(@item.errors.full_messages).to include("Status を選んでください")
       end
       it 'pay_idが1では登録できない' do
         @item.pay_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Pay  Select")
+        expect(@item.errors.full_messages).to include("Pay を選んでください")
       end
       it 'area_idが1では登録できない' do
         @item.area_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Area  Select")
+        expect(@item.errors.full_messages).to include("Area を選んでください")
       end
       it 'day_idが1では登録できない' do
         @item.day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Day  Select")
+        expect(@item.errors.full_messages).to include("Day を選んでください")
       end
       it 'priceが空では登録できない' do
         @item.price = ''
@@ -73,17 +73,17 @@ RSpec.describe Item, type: :model do
       it 'priceが半角数字ではないと登録できない' do
         @item.price = '１２３４５'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Half-width number")
+        expect(@item.errors.full_messages).to include("Price を半角数字で入力してください")
       end
       it 'priceが300未満だと登録できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include("Price を¥300〜9,999,999で入力してください")
       end
       it 'priceが9,999,999より大きいと登録できない' do
         @item.price = 10000000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include("Price を¥300〜9,999,999で入力してください")
       end
       it 'ユーザーが紐づいていないと登録できない' do
         @item.user = nil

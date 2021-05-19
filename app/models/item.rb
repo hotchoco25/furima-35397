@@ -15,14 +15,14 @@ class Item < ApplicationRecord
     validates :image
     validates :item_name
     validates :text
-    with_options numericality: { other_than: 1, message: " Select" } do
+    with_options numericality: { other_than: 1, message: "を選んでください" } do
       validates :category_id
       validates :status_id
       validates :pay_id
       validates :area_id
       validates :day_id
     end
-    validates :price, numericality: { only_integer: true, message: "Half-width number" },
-                      inclusion: { in: 300..9999999, message: "Out of setting range" }
+    validates :price, numericality: { only_integer: true, message: "を半角数字で入力してください" },
+                      inclusion: { in: 300..9999999, message: "を¥300〜9,999,999で入力してください" }
   end
 end

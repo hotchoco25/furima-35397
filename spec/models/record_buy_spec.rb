@@ -38,17 +38,17 @@ RSpec.describe RecordBuy, type: :model do
       it 'post_codeが-がないときは購入できない' do
         @record_buy.post_code = "1234567"
         @record_buy.valid?
-        expect(@record_buy.errors.full_messages).to include("Post code Input correctly")
+        expect(@record_buy.errors.full_messages).to include("Post code を - ありの半角数字で入力してください")
       end
       it 'post_codeが半角数字ではないときは購入できない' do
         @record_buy.post_code = "１２３ー４５６７"
         @record_buy.valid?
-        expect(@record_buy.errors.full_messages).to include("Post code Input correctly")
+        expect(@record_buy.errors.full_messages).to include("Post code を - ありの半角数字で入力してください")
       end
       it 'area_idが1では購入できない' do
         @record_buy.area_id = 1
         @record_buy.valid?
-        expect(@record_buy.errors.full_messages).to include("Area  Select")
+        expect(@record_buy.errors.full_messages).to include("Area を選んでください")
       end
       it 'muniが空では購入できない' do
         @record_buy.muni = ""
@@ -68,12 +68,12 @@ RSpec.describe RecordBuy, type: :model do
       it 'telに-が含まれているときは購入できない' do
         @record_buy.tel = "0120-00-0000"
         @record_buy.valid?
-        expect(@record_buy.errors.full_messages).to include("Tel Input only number")
+        expect(@record_buy.errors.full_messages).to include("Tel を半角数字で入力してください")
       end
       it 'telが全角数字では購入できない' do
         @record_buy.tel = "０９０１２３４５６７８"
         @record_buy.valid?
-        expect(@record_buy.errors.full_messages).to include("Tel Input only number")
+        expect(@record_buy.errors.full_messages).to include("Tel を半角数字で入力してください")
       end
       it 'ユーザーが紐づいていないと購入できない' do
         @record_buy.user_id = nil

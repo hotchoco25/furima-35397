@@ -11,13 +11,42 @@
           <th class="detail-item">ニックネーム</th>
           <td class="detail-value"><%= @user.nickname %></td>
         </tr>
-        <tr>
-          <th class="detail-item">名前</th>
-          <td class="detail-value"><%= @user.last_name %> <%= @user.first_name%></td>
-        </tr>
+        <% if @user.id == current_user.id %>
+          <tr>
+            <th class="detail-item">Eメール</th>
+            <td class="detail-value"><%= @user.email %></td>
+          </tr>
+          <tr>
+            <th class="detail-item">名前</th>
+            <td class="detail-value">
+              <%= @user.last_name %>
+              <%= @user.first_name%>
+            </td>
+          </tr>
+          <tr>
+            <th class="detail-item">フリガナ</th>
+            <td class="detail-value">
+              <%= @user.last_kana %>
+              <%= @user.first_kana %>
+            </td>
+          </tr>
+          <tr>
+            <th class="detail-item">生年月日</th>
+            <td class="detail-value">
+              <%= @user.birth.year %>年
+              <%= @user.birth.month %>月
+              <%= @user.birth.day %>日
+            </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
+  <% if current_user.id == @user.id %>
+    <div class='user-edit-btn'>
+      <%= link_to "ユーザー情報の編集", edit_user_registration_path(@user.id), method: :get, class: "user-red-btn" %>
+    </div>
+  <% end %>
   <div class='item-contents'>
     <h2 class='title'>出品商品</h2>
     <ul class='item-lists'>

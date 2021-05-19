@@ -8,3 +8,31 @@ ja:
       - :year
       - :month
       - :day
+  activerecord:
+    attributes:
+      user:
+        nickname: ニックネーム
+        last_name: 名字
+        first_name: 名前
+        last_kana: ミョウジ
+        first_kana: ナマエ
+        birth: 生年月日
+      item:
+        image: 写真
+        item_name: 商品名
+        text: 商品説明
+        category_id: カテゴリー
+        status_id: 商品の状態
+        pay_id: 配送料の負担
+        area_id: 発送元の地域
+        day_id: 発送までの日数
+        price: 金額
+  activemodel:
+    attributes:
+      record_buy:
+        token: クレジットカード情報
+        post_code: 郵便番号
+        area_id: 都道府県
+        muni: 市区町村
+        add: 住所
+        tel: 電話番号
