@@ -13,6 +13,10 @@
         </tr>
         <% if @user.id == current_user.id %>
           <tr>
+            <th class="detail-item">Eメール</th>
+            <td class="detail-value"><%= @user.email %></td>
+          </tr>
+          <tr>
             <th class="detail-item">名前</th>
             <td class="detail-value">
               <%= @user.last_name %>
