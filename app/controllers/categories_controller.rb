@@ -2,6 +2,7 @@ class CategoriesController < ApplicationController
   before_action :redirect_path, only: :show
 
   def show
+    @categories = Category.all
     @category = Category.find(params[:id])
     @items = @category.items.order("created_at DESC").includes(:user)
   end

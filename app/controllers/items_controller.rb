@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :redirect_path, only: [:edit, :update, :destroy]
   before_action :redirect_path_sold, only: [:edit, :update, :destroy]
+  before_action :set_category, only: [:index, :show]
 
   def index
     @items = Item.order("created_at DESC").includes(:user)
@@ -65,5 +66,9 @@ class ItemsController < ApplicationController
     if @item.record.present?
       redirect_to root_path
     end
+  end
+
+  def set_category
+    @categories = Category.all
   end
 end
