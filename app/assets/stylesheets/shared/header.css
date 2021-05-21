@@ -71,6 +71,7 @@
   position: absolute;
   background-color: #ffffff;
   border: 2px solid black;
+  z-index: 1;
 }
 
 .category-show>li {

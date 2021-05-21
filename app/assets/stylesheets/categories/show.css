@@ -2,8 +2,6 @@
   background: #f8f8f8;
 }
 
-/* 商品一覧 */
-
 .item-contents {
   background-color: #FFF;
   display: flex;
@@ -96,5 +94,3 @@
 .star-count {
   font-size: 2vh;
 }
-
-/* //商品一覧 */
