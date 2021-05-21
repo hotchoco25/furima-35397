@@ -12,7 +12,16 @@
   </div>
   <div class='nav'>
     <ul class='lists-left'>
-      <li><%= link_to 'カテゴリー', "#", class: "category-list" %></li>
+      <li id="category-list">
+        <a class="category-list", data-toggle="dropdown">カテゴリー</a>
+        <ul class="category-show", id="pull-down">
+          <% @categories.each do |category| %>
+            <% if category.id >= 2 && category.id <= 11 %>
+              <li><%=link_to category.category_name, category_path(category.id) %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </li>
       <li><%= link_to 'ブランド', "#", class: "brand-list" %></li>
     </ul>
     <ul class='lists-right'>

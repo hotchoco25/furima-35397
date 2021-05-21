@@ -66,6 +66,21 @@
   color: #333333;
 }
 
+.category-show {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  border: 2px solid black;
+}
+
+.category-show>li {
+  border: 1px solid black;
+}
+
+.category-show>li>a {
+  color: black;
+}
+
 .brand-list {
   text-decoration: none;
   color: #333333;

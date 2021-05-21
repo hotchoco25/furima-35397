@@ -38,11 +38,11 @@
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%=link_to @item.user.nickname, user_path(@item.user_id) %></td>
+          <td class="detail-value"><%= link_to @item.user.nickname, user_path(@item.user_id), class:"detail-value-link" %></td>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= @item.category.category_name %></td>
+          <td class="detail-value"><%= link_to @item.category.category_name, category_path(@item.category.id), class:"detail-value-link"  %></td>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
@@ -102,12 +102,12 @@
           <div class="comment-list-maine">
             <%= comment.text %>
             <% if user_signed_in? && (comment.user_id == current_user.id) %>
-              <%= link_to "削除", item_comment_path(comment.id), method: :delete %>
+              <%= link_to "削除", item_comment_path(comment.id), method: :delete, class:"comment-delete" %>
             <% end %>
           </div>
           <div class="comment-list-info">
-            <%=link_to comment.user.nickname, user_path(comment.user_id) %>
-            <%= l comment.created_at %>
+            <%=link_to comment.user.nickname, user_path(comment.user_id), class:"comment-link" %>
+            <%= "　#{l comment.created_at}" %>
           </div>
         </div>
       <% end %>
@@ -122,7 +122,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class="another-item"><%= @item.category.category_name %>をもっと見る</a>
+  <%= link_to "#{@item.category.category_name}をもっと見る", category_path(@item.category.id), class:"another-item" %>
 </div>
 
 <%= render "shared/footer" %>

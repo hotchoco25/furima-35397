@@ -2,47 +2,14 @@
   background: #f8f8f8;
 }
 
-.user-box {
-  background-color: #FFF;
-  width: 100vw;
-  padding: 5vh 15vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.user-box>.name {
-  text-align: center;
-  font-weight: bold;
-  font-size: 25px;
-}
-
-.detail-table {
-  margin-bottom: 30px;
-  width: 76%;
-}
-
-.detail-item {
-  width: 20%;
-  background-color: #eee;
-  border: 1px solid #dedede;
-  font-size: 14px;
-  text-align: center;
-}
-
-.detail-value {
-  width: 80%;
-  padding: 20px;
-  border: 1px solid #dedede;
-  font-size: 14px;
-}
+/* 商品一覧 */
 
 .item-contents {
   background-color: #FFF;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5vh 0;
+  padding: 10vh 0;
 }
 
 .item-contents>.title {
@@ -130,20 +97,4 @@
   font-size: 2vh;
 }
 
-.user-edit-btn {
-  background-color: #FFF;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.user-red-btn {
-  text-align: center;
-  background-color: #ea352d;
-  font-size: 24px;
-  font-weight: bold;
-  color: #FFF;
-  margin: 20px 0px;
-  padding: 2vh 8vw;
-}
+/* //商品一覧 */
