@@ -190,6 +190,15 @@ RSpec.describe "ユーザー情報編集", type: :system do
     end
   end
   context "ユーザー情報の編集ができないとき" do
+    it "ログインしていない自分のユーザー情報は編集できない" do
+      # トップページに移動する
+      basic_pass root_path
+      visit root_path
+      # マイページに移動する
+      visit user_path(@user1.id)
+      # 編集ボタンがない
+      expect(page).to have_no_content("ユーザー情報の編集")
+    end
     it  "ログインしたユーザーは自分以外のユーザー情報を編集できない" do
       # トップページに移動する
       basic_pass root_path
