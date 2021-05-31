@@ -1,6 +1,7 @@
 module SignInSupport
   def sign_in(user)
     # ログインページに移動する
+    basic_pass root_path
     visit new_user_session_path
     # 正しいユーザー情報を入力する
     fill_in "email", with: user.email
