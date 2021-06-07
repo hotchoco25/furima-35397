@@ -11,7 +11,7 @@
           <th class="detail-item">ニックネーム</th>
           <td class="detail-value"><%= @user.nickname %></td>
         </tr>
-        <% if @user.id == current_user.id %>
+        <% if current_user.present? && @user.id == current_user.id %>
           <tr>
             <th class="detail-item">Eメール</th>
             <td class="detail-value"><%= @user.email %></td>
@@ -42,7 +42,7 @@
       </tbody>
     </table>
   </div>
-  <% if current_user.id == @user.id %>
+  <% if current_user.present? && current_user.id == @user.id %>
     <div class='user-edit-btn'>
       <%= link_to "ユーザー情報の編集", edit_user_registration_path(@user.id), method: :get, class: "user-red-btn" %>
     </div>
